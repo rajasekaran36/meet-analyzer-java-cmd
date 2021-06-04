@@ -1,0 +1,77 @@
+package handles;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import model.Participation;
+import model.ReportRecord;
+import model.Student;
+import model.StudentMap;
+public class ReportRecordService {
+
+    public StudentMapService studentMapService;
+    public MeetingService meetingService;
+    List<ReportRecord> reportRecords = new ArrayList<>();
+
+    public ReportRecordService(StudentMapService studentMapService,MeetingService meetingService){
+        this.studentMapService = studentMapService;
+        this.meetingService = meetingService;
+        getReportRecords();
+    }
+
+    public List<ReportRecord> getReportRecords(){
+
+        for(Participation  participation:meetingService.getMeeting().getParticipations()){
+            Student student = studentMapService.getStudentByGmeetName(participation.getGmeetName());
+            
+            if(student!=null){
+                ReportRecord reportRecord = new ReportRecord(student, participation);
+                reportRecord.analize();
+                reportRecords.add(reportRecord);
+            }
+        }
+        return reportRecords;
+    }
+
+    public String reportToCSV(){
+        List<String> lines = new ArrayList<>();
+        
+        for(StudentMap studentMap:studentMapService.getStudentMaps()){
+            List<String> words = new ArrayList<>();
+            Student student = studentMap.getStudent();
+            words.add(String.valueOf(student.getId()));
+            words.add(String.valueOf(student.getRollNo()));
+            words.add(String.valueOf(student.getName()));
+            ReportRecord reportRecord = getReportRecord(student.getId());
+            if(reportRecord!=null){
+                Participation participation = reportRecord.getParticipation();
+                words.add(participation.getGmeetName());
+                words.add(participation.getArrivalTime());
+                words.add(participation.getLastSeen());
+                words.add(String.valueOf(reportRecord.getTotalDuration()));
+                words.add(reportRecord.getStatus());
+                words.add(reportRecord.getComments());
+
+            }
+            else{
+                words.add("");
+                words.add("");
+                words.add("");
+                words.add("");
+                words.add("NAB");
+                words.add("");
+            }
+            lines.add(String.join(",", words));
+        }
+        return String.join("\n", lines);
+    }
+
+    public ReportRecord getReportRecord(Integer studentID){
+        for(ReportRecord reportRecord:reportRecords){
+            if(reportRecord.getStudent().getId()==studentID){
+                return reportRecord;
+            }
+        }
+        return null;
+    }
+}
