@@ -1,5 +1,9 @@
 package service;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +23,7 @@ public class ReportService {
         report = new Report(reportRecordService.getMeeting(), reportRecordService.getReportRecords());
     }
 
-    public String reportToCSV(){
+    public String reportString(){
         List<String> lines = new ArrayList<>();
         
         for(StudentMap studentMap:reportRecordService.getStudentMaps()){
@@ -59,5 +63,15 @@ public class ReportService {
             }
         }
         return null;
+    }
+
+    public boolean writeToCSVFile(String filePath){
+        try {
+            Files.writeString(Path.of(filePath),this.reportString(),StandardCharsets.UTF_8);
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
