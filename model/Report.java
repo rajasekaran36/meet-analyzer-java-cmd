@@ -6,6 +6,11 @@ public class Report {
     private Meeting meeting;
     List<ReportRecord> records;
 
+    public Report(Meeting meeting, List<ReportRecord> records) {
+        this.meeting = meeting;
+        this.records = records;
+    }
+
 
     public Meeting getMeeting() {
         return this.meeting;

@@ -1,42 +1,28 @@
-package handles;
+package service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Meeting;
 import model.Participation;
+import model.Report;
 import model.ReportRecord;
 import model.Student;
 import model.StudentMap;
-public class ReportRecordService {
 
-    public StudentMapService studentMapService;
-    public MeetingService meetingService;
-    List<ReportRecord> reportRecords = new ArrayList<>();
+public class ReportService {
+    private ReportRecordService reportRecordService;
+    private Report report;
 
-    public ReportRecordService(StudentMapService studentMapService,MeetingService meetingService){
-        this.studentMapService = studentMapService;
-        this.meetingService = meetingService;
-        getReportRecords();
-    }
-
-    public List<ReportRecord> getReportRecords(){
-
-        for(Participation  participation:meetingService.getMeeting().getParticipations()){
-            Student student = studentMapService.getStudentByGmeetName(participation.getGmeetName());
-            
-            if(student!=null){
-                ReportRecord reportRecord = new ReportRecord(student, participation);
-                reportRecord.analize();
-                reportRecords.add(reportRecord);
-            }
-        }
-        return reportRecords;
+    public ReportService(ReportRecordService reportRecordService){
+        this.reportRecordService = reportRecordService;
+        report = new Report(reportRecordService.getMeeting(), reportRecordService.getReportRecords());
     }
 
     public String reportToCSV(){
         List<String> lines = new ArrayList<>();
         
-        for(StudentMap studentMap:studentMapService.getStudentMaps()){
+        for(StudentMap studentMap:reportRecordService.getStudentMaps()){
             List<String> words = new ArrayList<>();
             Student student = studentMap.getStudent();
             words.add(String.valueOf(student.getId()));
@@ -67,7 +53,7 @@ public class ReportRecordService {
     }
 
     public ReportRecord getReportRecord(Integer studentID){
-        for(ReportRecord reportRecord:reportRecords){
+        for(ReportRecord reportRecord:report.getRecords()){
             if(reportRecord.getStudent().getId()==studentID){
                 return reportRecord;
             }

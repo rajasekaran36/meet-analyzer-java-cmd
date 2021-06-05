@@ -3,9 +3,10 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import handles.MeetingService;
-import handles.ReportRecordService;
-import handles.StudentMapService;
+import service.MeetingService;
+import service.ReportRecordService;
+import service.ReportService;
+import service.StudentMapService;
 
 public class Main {
     public static void main(String[] args) {
@@ -15,9 +16,13 @@ public class Main {
         MeetingService meetingService = new MeetingService();
         meetingService.loadMeetingDetails("files/meet copy.csv");
 
-        ReportRecordService recordService = new ReportRecordService(studentMapService, meetingService);
+        ReportRecordService reportRecordService = new ReportRecordService(studentMapService, meetingService);
+
+        ReportService reportService = new ReportService(reportRecordService);
+        
+        
         try {
-            Files.writeString(Path.of("reports/report.csv"),recordService.reportToCSV(),StandardCharsets.UTF_8);
+            Files.writeString(Path.of("reports/report.csv"),reportService.reportToCSV(),StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
         }
