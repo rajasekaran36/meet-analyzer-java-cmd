@@ -6,8 +6,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-
-import model.Meeting;
 import model.Participation;
 import model.Report;
 import model.ReportRecord;

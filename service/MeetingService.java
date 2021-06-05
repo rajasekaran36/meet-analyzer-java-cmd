@@ -25,7 +25,7 @@ public class MeetingService {
         this.meeting = meeting;
     }
 
-    public void loadMeetingDetails(String filePath) {
+    public MeetingService getService(String filePath) {
 
         List<String> lines = MeetUtils.cleanUp(filePath);
 
@@ -54,5 +54,6 @@ public class MeetingService {
             }
         }
         meeting.setParticipations(participations);
+        return this;
     }
 }

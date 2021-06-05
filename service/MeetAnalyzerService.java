@@ -1,17 +1,21 @@
 package service;
 
 public class MeetAnalyzerService {
-    public MeetAnalyzerService(String studentMappingFilePath, String meetFilePath, String reportFilePath){
-        StudentMapService studentMapService = new StudentMapService();
-        studentMapService.loadDetails(studentMappingFilePath);
 
-        MeetingService meetingService = new MeetingService();
-        meetingService.loadMeetingDetails(meetFilePath);
+    private StudentMapService studentMapService;
+    private MeetingService meetingService;
+    private ReportRecordService reportRecordService;
+    private ReportService reportService;
 
-        ReportRecordService reportRecordService = new ReportRecordService(studentMapService, meetingService);
-
-        ReportService reportService = new ReportService(reportRecordService);
+    public MeetAnalyzerService(String studentMappingFilePath, String meetFilePath){
+        this.studentMapService = new StudentMapService().getService(studentMappingFilePath);
+        this.meetingService = new MeetingService().getService(meetFilePath);
+        this.reportRecordService = new ReportRecordService(studentMapService, meetingService);
+        this.reportService = new ReportService(reportRecordService);
         
-        reportService.writeToCSVFile(reportFilePath);
+    }
+
+    public boolean writeToCSVFile(String reportFilePath){
+        return reportService.writeToCSVFile(reportFilePath);
     }
 }
