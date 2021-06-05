@@ -1,12 +1,14 @@
-package service;
+package io.github.rajasekaran.meettool.service;
+
+import io.github.rajasekaran.meettool.model.Participation;
+import io.github.rajasekaran.meettool.model.ReportRecord;
+import io.github.rajasekaran.meettool.model.Student;
+import io.github.rajasekaran.meettool.model.StudentMap;
+import io.github.rajasekaran.meettool.model.Meeting;
 
 import java.util.ArrayList;
 import java.util.List;
-import model.Meeting;
-import model.Participation;
-import model.ReportRecord;
-import model.Student;
-import model.StudentMap;
+
 public class ReportRecordService {
 
     public StudentMapService studentMapService;

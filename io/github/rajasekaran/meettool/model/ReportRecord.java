@@ -1,4 +1,4 @@
-package model;
+package io.github.rajasekaran.meettool.model;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

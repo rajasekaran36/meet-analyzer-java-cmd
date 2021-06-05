@@ -1,4 +1,4 @@
-package service;
+package io.github.rajasekaran.meettool.service;
 
 public class MeetAnalyzerService {
 

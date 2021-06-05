@@ -1,4 +1,4 @@
-package model;
+package io.github.rajasekaran.meettool.model;
 
 import java.util.ArrayList;
 import java.util.List;

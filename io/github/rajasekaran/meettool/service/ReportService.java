@@ -1,4 +1,4 @@
-package service;
+package io.github.rajasekaran.meettool.service;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -6,11 +6,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import model.Participation;
-import model.Report;
-import model.ReportRecord;
-import model.Student;
-import model.StudentMap;
+import io.github.rajasekaran.meettool.model.Participation;
+import io.github.rajasekaran.meettool.model.Report;
+import io.github.rajasekaran.meettool.model.ReportRecord;
+import io.github.rajasekaran.meettool.model.Student;
+import io.github.rajasekaran.meettool.model.StudentMap;
 
 public class ReportService {
     private ReportRecordService reportRecordService;

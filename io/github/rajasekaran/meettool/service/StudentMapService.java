@@ -1,4 +1,4 @@
-package service;
+package io.github.rajasekaran.meettool.service;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -7,9 +7,9 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import io.github.rajasekaran.meettool.model.Student;
+import io.github.rajasekaran.meettool.model.StudentMap;
 
-import model.Student;
-import model.StudentMap;
 
 public class StudentMapService {
     private List<StudentMap> studentMaps;

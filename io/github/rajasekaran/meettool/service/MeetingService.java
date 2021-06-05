@@ -1,12 +1,12 @@
-package service;
+package io.github.rajasekaran.meettool.service;
+
+import io.github.rajasekaran.meettool.model.Meeting;
+import io.github.rajasekaran.meettool.model.Participation;
+import io.github.rajasekaran.meettool.utils.MeetUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import model.Meeting;
-import model.Participation;
-import utils.MeetUtils;
 
 public class MeetingService {
 

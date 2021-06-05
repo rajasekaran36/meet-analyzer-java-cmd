@@ -1,4 +1,4 @@
-package model;
+package io.github.rajasekaran.meettool.model;
 
 public class Student {
     private Integer id;
