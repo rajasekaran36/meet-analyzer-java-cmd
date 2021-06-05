@@ -54,6 +54,5 @@ public class MeetingService {
             }
         }
         meeting.setParticipations(participations);
-        System.out.println(meeting);
     }
 }

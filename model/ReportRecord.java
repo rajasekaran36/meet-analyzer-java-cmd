@@ -75,8 +75,8 @@ public class ReportRecord{
 
     public void analize(){
         if(student!=null && participation!=null){
-            String start = "01-01-2021 "+participation.getArrivalTime()+":00";
-            String end = "01-01-2021 "+participation.getLastSeen()+":00";
+            String start = participation.getArrivalTime();
+            String end = participation.getLastSeen();
             this.totalDuration = computeDuration(start, end);
             if(this.totalDuration>=30){
                 this.status = "P";
@@ -90,12 +90,11 @@ public class ReportRecord{
 
     private  Long computeDuration(String start,String end){
         Long duration = 0L;
-        SimpleDateFormat format = new SimpleDateFormat( "dd-MM-yyyy HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
         try {
             Date startTime = format.parse(start);
             Date endTime = format.parse(end);
-            duration = (endTime.getTime() - startTime.getTime()) / (1000 * 60) % 60;
-            
+            duration = (endTime.getTime() - startTime.getTime()) / (1000 * 60);
         } catch (ParseException e) {
             e.printStackTrace();
         }

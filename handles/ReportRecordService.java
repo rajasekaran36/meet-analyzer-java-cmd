@@ -58,8 +58,8 @@ public class ReportRecordService {
                 words.add("");
                 words.add("");
                 words.add("");
-                words.add("NAB");
-                words.add("");
+                words.add("AB");
+                words.add("ABSENT");
             }
             lines.add(String.join(",", words));
         }

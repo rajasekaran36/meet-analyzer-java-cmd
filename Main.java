@@ -1,11 +1,11 @@
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
 import handles.MeetingService;
 import handles.ReportRecordService;
 import handles.StudentMapService;
-import model.ReportRecord;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,10 +16,8 @@ public class Main {
         meetingService.loadMeetingDetails("files/meet copy.csv");
 
         ReportRecordService recordService = new ReportRecordService(studentMapService, meetingService);
-
-        System.out.println(recordService.reportToCSV());
         try {
-            Files.writeString(Path.of("reports/report.csv"),recordService.reportToCSV());
+            Files.writeString(Path.of("reports/report.csv"),recordService.reportToCSV(),StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
         }
